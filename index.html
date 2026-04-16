@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MedLife Homoeopathic Clinic</title>
+    <meta name="description" content="Premium homoeopathic care by Dr. Keval Patel (BHMS) in Visnagar. Book appointments online, via WhatsApp, call, or tele-consultation." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <header class="glass topbar">
+      <a class="brand" href="#home" aria-label="MedLife Homoeopathic Clinic home">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 120 120" role="img">
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#4ef0d2" />
+                <stop offset="100%" stop-color="#2c7bff" />
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="60" r="54" fill="url(#logoGrad)" opacity="0.16" />
+            <path d="M27 63c8-18 19-27 33-27 17 0 31 11 34 31" stroke="url(#logoGrad)" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <path d="M46 73h28" stroke="#e9f7ff" stroke-width="8" stroke-linecap="round"/>
+            <path d="M60 59v28" stroke="#e9f7ff" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>
+          <strong>MedLife Homoeopathic Clinic</strong>
+          <small data-i18n="tagline">Heal Naturally, Live Fully</small>
+        </span>
+      </a>
+
+      <nav>
+        <a href="#services" data-i18n="navServices">Services</a>
+        <a href="#doctor" data-i18n="navDoctor">Doctor</a>
+        <a href="#appointment" data-i18n="navAppointment">Book</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+        <a href="login.html" class="btn btn-ghost" data-i18n="login">Patient Login</a>
+      </nav>
+
+      <div class="lang-switcher">
+        <label for="langSelect" class="sr-only">Language</label>
+        <select id="langSelect" aria-label="Select language">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+          <option value="gu">ગુજરાતી</option>
+        </select>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero glass">
+        <div>
+          <p class="eyebrow" data-i18n="premiumCare">Premium Homoeopathic Care in Visnagar</p>
+          <h1 data-i18n="heroTitle">Personalized healing for skin, hair, bone, joint & whole-body wellness.</h1>
+          <p data-i18n="heroSub">
+            Trusted care by Dr. Keval Patel (BHMS) with in-clinic, online, and tele-consultation options.
+          </p>
+          <div class="hero-cta">
+            <a href="#appointment" class="btn" data-i18n="bookNow">Book Appointment</a>
+            <a href="https://wa.me/917016551224" class="btn btn-ghost" target="_blank" rel="noreferrer" data-i18n="chatWhatsApp">Chat on WhatsApp</a>
+          </div>
+          <div class="hero-pills">
+            <span data-i18n="timing">5:00 PM – 9:00 PM (Sunday Closed)</span>
+            <span data-i18n="tele">Google Meet Tele-Consultation Available</span>
+          </div>
+        </div>
+
+        <aside class="stats">
+          <article>
+            <h3>5+</h3>
+            <p data-i18n="expYears">Years Experience</p>
+          </article>
+          <article>
+            <h3>2021</h3>
+            <p data-i18n="since">Serving Since</p>
+          </article>
+          <article>
+            <h3>100%</h3>
+            <p data-i18n="personalPlan">Personalized Treatment Plan</p>
+          </article>
+        </aside>
+      </section>
+
+      <section id="services" class="section glass">
+        <h2 data-i18n="servicesTitle">Services & Treatments</h2>
+        <div class="grid cards-3">
+          <article class="card"><h3 data-i18n="acne">Acne & Skin Disorders</h3><p data-i18n="acneDesc">Acne, allergies, chronic skin concerns, and holistic skin support.</p></article>
+          <article class="card"><h3 data-i18n="hair">Hair Fall Programs</h3><p data-i18n="hairDesc">Special packages for hair fall with diet and lifestyle guidance.</p></article>
+          <article class="card"><h3 data-i18n="ortho">Orthopaedic Care</h3><p data-i18n="orthoDesc">Bone and joint disease support with gentle homoeopathic plans.</p></article>
+          <article class="card"><h3 data-i18n="allergies">Allergies</h3><p data-i18n="allergiesDesc">Long-term allergy management and immune support treatment.</p></article>
+          <article class="card"><h3 data-i18n="kidney">Kidney Stones</h3><p data-i18n="kidneyDesc">Consultative care for kidney stone symptoms and recurrence support.</p></article>
+          <article class="card"><h3 data-i18n="online">Online Consultation</h3><p data-i18n="onlineDesc">Tele-consults on Google Meet for convenience and continuity.</p></article>
+        </div>
+      </section>
+
+      <section id="doctor" class="section glass two-col">
+        <div>
+          <h2 data-i18n="doctorTitle">Doctor Profile</h2>
+          <ul class="profile-list">
+            <li><strong data-i18n="name">Name:</strong> Dr. Keval Patel</li>
+            <li><strong data-i18n="qualification">Qualification:</strong> BHMS</li>
+            <li><strong data-i18n="regNo">Registration No.:</strong> G-28537</li>
+            <li><strong data-i18n="experience">Experience:</strong> 5 years</li>
+            <li><strong data-i18n="specialization">Specialisations:</strong> Orthopaedics, Skin diseases</li>
+            <li><strong data-i18n="workExp">Practice:</strong> MedLife Homoeopathic Clinic since 2021</li>
+          </ul>
+        </div>
+        <figure class="doctor-photo">
+          <img src="assets/doctor-placeholder.svg" alt="Dr. Keval Patel" />
+          <figcaption data-i18n="photoNote">Professional photo placeholder (replace with uploaded photo).</figcaption>
+        </figure>
+      </section>
+
+      <section class="section glass">
+        <h2 data-i18n="virtualTour">3D Virtual Clinic Tour</h2>
+        <p data-i18n="tourSub">Interactive preview area. Connect your real 360° clinic media for a complete virtual walkthrough.</p>
+        <div class="tour-box">
+          <div class="orbit"></div>
+          <div class="tour-core">
+            <h3>MedLife</h3>
+            <p data-i18n="tourText">Modern • Clean • Patient-Friendly</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="appointment" class="section glass two-col">
+        <div>
+          <h2 data-i18n="bookSection">Appointment Booking</h2>
+          <p data-i18n="bookText">Choose walk-in, online booking, WhatsApp, or phone call. UPI payment and tele-consultation support included.</p>
+          <div class="chip-row">
+            <span>Walk-in</span><span>Online Booking</span><span>WhatsApp</span><span>Call</span><span>UPI</span><span>Google Meet</span>
+          </div>
+        </div>
+        <form id="bookingForm" class="form-card">
+          <label><span data-i18n="fullName">Full Name</span><input required name="name" /></label>
+          <label><span data-i18n="mobile">Mobile Number</span><input required name="mobile" pattern="[0-9]{10}" /></label>
+          <label><span data-i18n="condition">Condition / Concern</span><input required name="concern" /></label>
+          <label><span data-i18n="mode">Mode</span>
+            <select name="mode" required><option>Clinic Visit</option><option>Google Meet</option><option>WhatsApp</option></select>
+          </label>
+          <label><span data-i18n="slot">Preferred Slot</span><input type="datetime-local" name="slot" required /></label>
+          <button type="submit" class="btn" data-i18n="submitBooking">Submit Booking</button>
+          <small id="bookingMsg" aria-live="polite"></small>
+        </form>
+      </section>
+
+      <section class="section glass">
+        <h2 data-i18n="trustTitle">Testimonials & FAQs</h2>
+        <div class="grid two-up">
+          <div>
+            <article class="quote">“Very kind consultation and excellent guidance for my skin treatment.”</article>
+            <article class="quote">“Hair fall package gave visible improvement in a few months.”</article>
+          </div>
+          <div class="faq-wrap">
+            <details><summary data-i18n="faq1q">Do you provide online consultation?</summary><p data-i18n="faq1a">Yes, tele-consultation is available through Google Meet.</p></details>
+            <details><summary data-i18n="faq2q">Can I book via WhatsApp?</summary><p data-i18n="faq2a">Yes, use the floating WhatsApp button for instant booking support.</p></details>
+            <details><summary data-i18n="faq3q">Is Sunday open?</summary><p data-i18n="faq3a">No, clinic is closed on Sundays.</p></details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section glass">
+        <h2 data-i18n="blogTitle">Clinic Blog (Admin Managed)</h2>
+        <p data-i18n="blogSub">Publish patient education articles from your admin dashboard.</p>
+        <div id="blogList" class="grid cards-3"></div>
+      </section>
+    </main>
+
+    <footer id="contact" class="glass footer">
+      <div>
+        <h3>Contact</h3>
+        <p><strong>Phone / WhatsApp:</strong> <a href="tel:+917016551224">7016551224</a></p>
+        <p><strong>Email:</strong> <a href="mailto:keval83598@gmail.com">keval83598@gmail.com</a></p>
+        <p><strong>Address:</strong> 15/D, Sanskruti White-house, Nr. Kali High-Life, Nr. Shrey Petroleum, Mehsana Road, Visnagar - 384315</p>
+      </div>
+      <div>
+        <h3>Location</h3>
+        <p><a href="https://maps.app.goo.gl/xRNnaHZFfTsmqxg96" target="_blank" rel="noreferrer" data-i18n="openMap">Open in Google Maps</a></p>
+        <p><strong data-i18n="timingsLabel">Timings:</strong> 5:00 PM to 9:00 PM (Sunday Closed)</p>
+      </div>
+      <div>
+        <h3 data-i18n="quickLinks">Quick Links</h3>
+        <p><a href="signup.html" data-i18n="signup">Patient Sign-up</a></p>
+        <p><a href="login.html" data-i18n="login">Patient Login</a></p>
+        <p><a href="admin.html">Admin Dashboard</a></p>
+      </div>
+    </footer>
+
+    <a class="whatsapp-float" href="https://wa.me/917016551224" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">WhatsApp</a>
+
+    <script src="https://unpkg.com/three@0.161.0/build/three.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
