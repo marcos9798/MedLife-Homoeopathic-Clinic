@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Login | MedLife</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="auth-main">
+    <section class="glass auth-card">
+      <h1>Patient Login</h1>
+      <form id="loginForm" class="grid">
+        <label>Login via Gmail or Phone
+          <input required name="identity" placeholder="gmail or 10-digit mobile" />
+        </label>
+        <label>Password<input required type="password" name="password" /></label>
+        <button type="button" id="otpBtn" class="btn btn-ghost">2-Step Verification</button>
+        <button type="submit" class="btn">Login</button>
+        <button type="button" id="resetBtn" class="btn btn-ghost">Forgot Password</button>
+        <small id="loginMsg"></small>
+      </form>
+      <p>No account yet? <a href="signup.html">Create one</a></p>
+    </section>
+  </main>
+
+  <script>
+    let otpVerified = false;
+    document.getElementById('otpBtn').addEventListener('click', () => {
+      const code = prompt('Enter OTP (demo: 123456)');
+      otpVerified = code === '123456';
+      alert(otpVerified ? '✅ Verified' : '❌ OTP incorrect');
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      const identity = prompt('Enter registered phone number to reset password');
+      if (!identity) return;
+      const userRaw = localStorage.getItem(`medlife_user_${identity}`);
+      if (!userRaw) return alert('No user found with that phone number');
+      const user = JSON.parse(userRaw);
+      const newPass = prompt('Enter new password (min 8 chars)');
+      if (!newPass || newPass.length < 8) return alert('Invalid password length');
+      user.password = newPass;
+      user.confirmPassword = newPass;
+      localStorage.setItem(`medlife_user_${identity}`, JSON.stringify(user));
+      alert('✅ Password reset successful');
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!otpVerified) return alert('Please complete 2-step verification.');
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      const isPhone = /^\d{10}$/.test(data.identity);
+      if (!isPhone) {
+        document.getElementById('loginMsg').textContent = '✅ Login simulated for Gmail account.';
+        return;
+      }
+      const userRaw = localStorage.getItem(`medlife_user_${data.identity}`);
+      if (!userRaw) return alert('User not found. Please sign up first.');
+      const user = JSON.parse(userRaw);
+      if (user.password !== data.password) return alert('Invalid credentials');
+      document.getElementById('loginMsg').textContent = '✅ Login successful.';
+      otpVerified = false;
+    });
+  </script>
+</body>
+</html>
