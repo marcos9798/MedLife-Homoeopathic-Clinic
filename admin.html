@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | MedLife</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="auth-main">
+    <section class="glass auth-card">
+      <h1>Admin Dashboard</h1>
+      <p>Track website visits, appointments, payment status, and case progress.</p>
+
+      <div class="grid cards-3">
+        <article class="card"><h3 id="visitCount">0</h3><p>Website Visits</p></article>
+        <article class="card"><h3 id="bookingCount">0</h3><p>Total Bookings</p></article>
+        <article class="card"><h3 id="pendingPayments">0</h3><p>Pending Payments</p></article>
+      </div>
+
+      <h2>Appointment Schedule</h2>
+      <table class="glass" style="width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px">
+        <thead><tr><th>Name</th><th>Mobile</th><th>Concern</th><th>Slot</th><th>Status</th></tr></thead>
+        <tbody id="scheduleTable"></tbody>
+      </table>
+
+      <h2>Case Status Update</h2>
+      <form id="caseForm" class="grid">
+        <label>Patient Mobile<input required name="mobile" pattern="[0-9]{10}" /></label>
+        <label>Case Status<select name="status"><option>New</option><option>In Treatment</option><option>Follow-up Due</option><option>Recovered</option></select></label>
+        <label>UPI Payment Status<select name="payment"><option>Pending</option><option>Paid</option></select></label>
+        <button class="btn" type="submit">Update Status</button>
+      </form>
+
+      <h2>Blog Manager</h2>
+      <form id="blogForm" class="grid">
+        <label>Blog Title<input required name="title" /></label>
+        <label>Excerpt<textarea required name="excerpt"></textarea></label>
+        <button class="btn" type="submit">Publish Post</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const visits = Number(localStorage.getItem('medlife_visits') || 0);
+    document.getElementById('visitCount').textContent = visits;
+
+    const bookings = JSON.parse(localStorage.getItem('medlife_bookings') || '[]');
+    document.getElementById('bookingCount').textContent = bookings.length;
+
+    const pending = bookings.filter(b => b.payment !== 'Paid').length;
+    document.getElementById('pendingPayments').textContent = pending;
+
+    const tbody = document.getElementById('scheduleTable');
+    bookings.forEach(b => {
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>${b.name || ''}</td><td>${b.mobile || ''}</td><td>${b.concern || ''}</td><td>${b.slot || ''}</td><td>${b.status || 'New'}</td>`;
+      tbody.appendChild(row);
+    });
+
+    document.getElementById('caseForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      const list = JSON.parse(localStorage.getItem('medlife_bookings') || '[]');
+      const idx = list.findIndex(item => item.mobile === data.mobile);
+      if (idx < 0) return alert('No booking found for this mobile.');
+      list[idx].status = data.status;
+      list[idx].payment = data.payment;
+      localStorage.setItem('medlife_bookings', JSON.stringify(list));
+      alert('✅ Appointment case and payment status updated. Refresh page to view changes.');
+      e.target.reset();
+    });
+
+    document.getElementById('blogForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      const posts = JSON.parse(localStorage.getItem('medlife_blog_posts') || '[]');
+      posts.unshift(data);
+      localStorage.setItem('medlife_blog_posts', JSON.stringify(posts));
+      alert('✅ Blog post published. It will appear on homepage blog section.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
