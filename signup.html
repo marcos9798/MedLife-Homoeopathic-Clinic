@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Sign-up | MedLife</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="auth-main">
+    <section class="glass auth-card">
+      <h1>Patient Sign-up</h1>
+      <p>All fields are mandatory. OTP verification simulated for demo.</p>
+      <form id="signupForm" class="grid">
+        <div class="split-3">
+          <label>First Name<input required name="firstName" /></label>
+          <label>Middle Name<input required name="middleName" /></label>
+          <label>Last Name<input required name="lastName" /></label>
+        </div>
+
+        <div class="split-3">
+          <label>Date of Birth<input required type="date" name="dob" id="dob" /></label>
+          <label>Age (Auto)<input required readonly name="age" id="age" /></label>
+          <label>Phone Number<input required pattern="[0-9]{10}" name="phone" /></label>
+        </div>
+
+        <label>Gmail ID<input required type="email" name="email" placeholder="example@gmail.com" /></label>
+        <div class="grid split-3">
+          <label>House / Block No.<input required name="house" /></label>
+          <label>Street<input required name="street" /></label>
+          <label>Landmark<input required name="landmark" /></label>
+          <label>Village / City<input required name="city" /></label>
+          <label>Pincode<input required name="pincode" pattern="[0-9]{6}" /></label>
+          <label>State<input required name="state" /></label>
+          <label>District<input required name="district" /></label>
+        </div>
+
+        <button type="button" id="gpsBtn" class="btn btn-ghost map-btn">Auto-detect Address by GPS</button>
+
+        <label>Create Password<input required type="password" name="password" minlength="8" /></label>
+        <label>Confirm Password<input required type="password" name="confirmPassword" minlength="8" /></label>
+
+        <button type="button" id="verifyBtn" class="btn">2-Step Verify (Email + Phone OTP)</button>
+        <button type="submit" class="btn">Create Account</button>
+        <small id="signupMsg"></small>
+      </form>
+      <p>Already registered? <a href="login.html">Login here</a></p>
+    </section>
+  </main>
+
+  <script>
+    const dob = document.getElementById('dob');
+    const age = document.getElementById('age');
+    dob.addEventListener('change', () => {
+      const birth = new Date(dob.value);
+      const now = new Date();
+      let years = now.getFullYear() - birth.getFullYear();
+      const m = now.getMonth() - birth.getMonth();
+      if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) years--;
+      age.value = years > 0 ? years : '';
+    });
+
+    let verified = false;
+    document.getElementById('verifyBtn').addEventListener('click', () => {
+      const eOtp = prompt('Enter Email OTP (use 123456 for demo)');
+      const pOtp = prompt('Enter Phone OTP (use 123456 for demo)');
+      verified = eOtp === '123456' && pOtp === '123456';
+      alert(verified ? '✅ Verification successful' : '❌ OTP verification failed');
+    });
+
+    document.getElementById('gpsBtn').addEventListener('click', () => {
+      if (!navigator.geolocation) return alert('Geolocation not supported');
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          alert(`GPS location captured (Lat: ${pos.coords.latitude.toFixed(5)}, Lng: ${pos.coords.longitude.toFixed(5)}). Please review address fields.`);
+        },
+        () => alert('Unable to fetch GPS location. Please enter address manually.')
+      );
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!verified) return alert('Please complete 2-step verification first.');
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      if (data.password !== data.confirmPassword) return alert('Passwords do not match');
+      localStorage.setItem(`medlife_user_${data.phone}`, JSON.stringify(data));
+      document.getElementById('signupMsg').textContent = '✅ Account created successfully. You can now login.';
+      e.target.reset();
+      verified = false;
+    });
+  </script>
+</body>
+</html>
